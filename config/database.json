@@ -1,0 +1,20 @@
+{
+	"Config":
+	{
+		"MysqlConnection":
+		{
+			"IP": "127.0.0.1",
+			"Port": 3306,
+			"User": "root",
+			"Passwd": "passwd",
+			"DBName": "testdb",
+			"max_connections": 150
+		},
+		"RedisConnection":
+		{
+			"IP": "127.0.0.1",
+			"Port": 6379,
+			"max_connections": 10
+		}
+	}
+}

@@ -1,0 +1,9 @@
+<IDs>
+    <!-- WORKFLOW 0 ~ 100 -->
+    <MID id="CREATE_WORKFLOW_REQUEST" value="1"/>
+    <MID id="CREATE_WORKFLOW_RESPONSE" value="2"/>
+
+    <!-- HADOOP 101 ~ 200 -->
+    <MID id="CRAETE_HADOOP_INSTANCE_REQUEST" value="101"/>
+    <MID id="CRAETE_HADOOP_INSTANCE_REQUEST" value="102"/>
+</IDs>

@@ -1,0 +1,11 @@
+<errors>
+    <!-- COMMON [0 ~ 200] -->
+    <error id="DB_ERROR_EXECUTE" value="1" prompt="操作数据库失败" msg="操作数据库失败"/>
+    <error id="DB_ERROR_COMMAND" value="2" prompt="创建数据库操作指令失败" msg="创建数据库操作指令失败"/>
+    <error id="DB_ERROR_KEY_NOT_EXIST" value="3" prompt="找不到对应数据" msg="找不到对应数据"/>
+
+    <!-- WORKFLOW [200 ~ 300] -->
+    <error id="WORKFLOW_ERROR_NOT_LOGIN" value="201" prompt="用户没有登录" msg="用户没有登录"/>
+    <error id="WORKFLOW_ERROR_NOT_SUPPORTED_REQUEST" value="202" prompt="不支持的请求" msg="不支持的请求"/>
+</errors>
+
