@@ -13,6 +13,8 @@ CPPFLAGS := -std=c++11 -O2 -g -fPIC -DNDEBUG
 CFILES := $(wildcard ./*.c)
 CPPFILES := $(wildcard ./*.cc ./*.cpp)
 OBJECTS := $(addsuffix .o, $(basename $(CFILES)) $(basename $(CPPFILES)))
+#TARGET := main master_worker
+TARGET := master_worker
 
 # 安静模式的核心代码
 ifeq ("$(origin V)", "command line")
@@ -29,11 +31,11 @@ ifeq ($(BUILD_VERBOSE),0)
 	QUIET_AR        = @echo '   ' AR $@;
 endif
 
-#all: main master_worker
+all: $(TARGET)
+
 #main: main.o
 #	$(QUIET_LINK)$(CXX) -DNDEBUG -o $@ $^ -L.. -lpieke -L../../rapidmsg -lrapidmsg
 
-all: master_worker
 master_worker: master_worker.o master_thread.o worker_thread.o
 	$(QUIET_LINK)$(CXX) -DNDEBUG -o $@ $^ -L.. -lpieke -L../../rapidmsg -lrapidmsg
 
@@ -50,4 +52,4 @@ master_worker: master_worker.o master_thread.o worker_thread.o
 .PHONY:clean
 
 clean:
-	-rm -f *.o $(TARGETS)
+	-rm -f *.o $(TARGET) 
