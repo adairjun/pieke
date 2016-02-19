@@ -18,11 +18,6 @@ LIBCFILES := $(wildcard ./util/*.c)
 LIBCPPFILES := $(wildcard ./util/*.cc ./util/*.cpp)
 LIBOBJECTS := $(addsuffix .o, $(basename $(LIBCFILES)) $(basename $(LIBCPPFILES)))
 
-CFILES := $(wildcard ./gtest/*.c)
-CPPFILES := $(wildcard ./gtest/*.cc ./gtest/*.cpp)
-OBJECTS := $(addsuffix .o, $(basename $(CFILES)) $(basename $(CPPFILES)))
-TARGETS := $(basename $(OBJECTS))
-
 # 安静模式的核心代码
 ifeq ("$(origin V)", "command line")
    BUILD_VERBOSE = $(V)
@@ -41,7 +36,9 @@ endif
 all: $(LIBRARY) $(SHARED) 
 	@echo "--------------------------make successful-----------------------"
 
-check: all $(TARGETS)
+# 进入gtest/目录下，并执行该目录下的make
+check: all 
+	make -C gtest
 
 $(LIBRARY): $(LIBOBJECTS)
 	-rm -rf $@
@@ -49,9 +46,6 @@ $(LIBRARY): $(LIBOBJECTS)
 
 $(SHARED):
 	$(QUIET_CXX)$(CXX) $(SHARED_LDFLAGS) -o $@ $(LIBOBJECTS) $(LIBS)
-
-$(TARGETS): $(OBJECTS)
-	$(QUIET_LINK)$(CXX) -DNDEBUG -o $@ $(addsuffix .o, $@) $(LIBS) -L. -lpieke -L../rapidmsg -lrapidmsg
 
 #下面的Makefile其实只是为了使用安静模式而已,如果将下面的代码去掉的话也能编译成功,因为默认的make规则将被执行
 ./util/%.o:./util/%.c
@@ -63,19 +57,11 @@ $(TARGETS): $(OBJECTS)
 ./util/%.o:./util/%.cpp 
 	$(QUIET_CXX)$(CXX) $(INCLUDE) $(CPPFLAGS) -c -o $@ $<
 
-./gtest/%.o:./gtest/%.c
-	$(QUIET_CC)$(CC) $(INCLUDE) $(CFLAGS) -c -o $@ $<
-
-./gtest/%.o:./gtest/%.cc
-	$(QUIET_CXX)$(CXX) $(INCLUDE) $(CPPFLAGS) -c -o $@ $<
-
-./gtest/%.o:./gtest/%.cpp 
-	$(QUIET_CXX)$(CXX) $(INCLUDE) $(CPPFLAGS) -c -o $@ $<
-
 .PHONY:clean install
 
 clean:
-	-rm -f ./util/*.o ./gtest/*.o $(LIBRARY) $(SHARED) $(TARGETS)
+	-rm -f ./util/*.o  $(LIBRARY) $(SHARED) 
+	make clean -C gtest
 	@echo "--------------------------make clean-----------------------"
 
 install:
