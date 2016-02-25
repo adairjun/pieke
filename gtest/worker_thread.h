@@ -28,10 +28,12 @@ typedef boost::shared_ptr<LibeventThread>LibeventThreadPtr;
 // 这个是表示libevent正在执行的连接,这个CONN和LIBEVENT_THREAD是多对一的关系
 // 写这个的目的就是为了每一个连接设定一个buffer，因为在多线程环境下如果使用全局变量char buf[DATA_BUFFER_SIZE]会有竞争问题
 typedef struct {
-    int    sfd;
-    char  buf[DATA_BUFFER_SIZE];
+    int  sfd;
+    char buf[DATA_BUFFER_SIZE];
     LibeventThread* thread;
 }CONN;
+
+typedef boost::shared_ptr<CONN>CONNPtr;
 
 class WorkerThread : public boost::enable_shared_from_this<WorkerThread> {
  public:

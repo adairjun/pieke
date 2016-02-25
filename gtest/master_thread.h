@@ -25,14 +25,14 @@ class MasterThread : public boost::enable_shared_from_this<MasterThread> {
   struct event_base* base_;
   evutil_socket_t listenFd_;
   struct event* event_;
-  WorkerThread* pWorkerThread_;
+  WorkerThreadPtr pWorkerThread_;
 };
 
 typedef boost::shared_ptr<MasterThread>MasterThreadPtr;
 
 typedef struct mybase {
-  SocketObj* socketPtr;
-  MasterThread* masterThreadPtr;
+  SocketObjPtr socketPtr;
+  MasterThreadPtr masterThreadPtr;
 }mybaseStruct;
 
 

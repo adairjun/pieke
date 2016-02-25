@@ -4,17 +4,14 @@
 #include <string>
 #include "pieke/logobj.h"
 
-
 const string HOST = "";
 const unsigned PORT = 9999;
 const int BACKLOG = 10;
 
-
-MasterThread::MasterThread() {
+MasterThread::MasterThread() : pWorkerThread_(new WorkerThread) {
   base_ = NULL;
   listenFd_ = 0;
   event_ = NULL;
-  pWorkerThread_ = new WorkerThread;
 }
 
 MasterThread::~MasterThread() {
@@ -36,7 +33,7 @@ bool MasterThread::InitMasterThread() {
 	return false;
   }
 
-  SocketObj* listener = new SocketObj(HOST, PORT, BACKLOG);
+  SocketObjPtr listener(new SocketObj(HOST, PORT, BACKLOG));
   if (listener->Listen() == false) {
 	LOG(ERROR) << "listen error\n";
   }
@@ -45,15 +42,13 @@ bool MasterThread::InitMasterThread() {
 
   // 设置为非阻塞
   evutil_make_socket_nonblocking(listenFd_);
-
   base_ = event_base_new();
 
   mybaseStruct* pointer = new mybaseStruct;
   pointer->socketPtr = listener;
-  pointer->masterThreadPtr = this;
+  pointer->masterThreadPtr = shared_from_this();
 
   event_ = event_new(base_, listenFd_, EV_READ | EV_PERSIST, MasterThread::AccepCb, (void*)pointer);
-
   event_add(event_, NULL);
 
   if(!pWorkerThread_->InitThreads()) {
@@ -61,31 +56,29 @@ bool MasterThread::InitMasterThread() {
   }
 
   LOG(INFO) << "MasterThread::InitMasterThread() return true.\n";
-
   return true;
 }
 
 void MasterThread::Run() {
-	LOG(INFO) << "MasterThread::Run() start.........\n";
+  LOG(INFO) << "MasterThread::Run() start.........\n";
 
-	int ret = event_base_dispatch(base_);
-
-    if (ret == -1) {
-	  int error_code = EVUTIL_SOCKET_ERROR();
-	  LOG(ERROR) << "MasterThread::Run():event_base_dispatch error, description = "
+  int ret = event_base_dispatch(base_);
+  if (ret == -1) {
+    int error_code = EVUTIL_SOCKET_ERROR();
+	LOG(ERROR) << "MasterThread::Run():event_base_dispatch error, description = "
 			  << evutil_socket_error_to_string(error_code);
-	  return;
-	} else if(ret == 1) {
-	  LOG(ERROR) << "MasterThread::Run():no events were registered.\n";
-	  return;
-	}
+	return;
+  } else if(ret == 1) {
+	LOG(ERROR) << "MasterThread::Run():no events were registered.\n";
+	return;
+  }
 }
 
 void MasterThread::AccepCb(evutil_socket_t listen_socket, short event, void* arg) {
 	LOG(INFO) << "MasterThread::Accept() start.........\n";
 	mybaseStruct* pointer = static_cast<mybaseStruct*>(arg);
-	SocketObj* listener = pointer->socketPtr;
-	MasterThread* masterThreadPtr = pointer->masterThreadPtr;
+	SocketObjPtr listener = pointer->socketPtr;
+	MasterThreadPtr masterThreadPtr = pointer->masterThreadPtr;
 	evutil_socket_t fd = listener->Accept();
 	if (fd == -1) {
 	  LOG(ERROR) << "MasterThread::AccepCb:accept error!\n";

@@ -11,7 +11,9 @@ WorkerThread::WorkerThread() {
 }
 
 WorkerThread::~WorkerThread() {
-
+  for(auto iter : vec_libevent_thread_) {
+    delete iter;
+  }
 }
 
 void WorkerThread::Dump() const {
@@ -54,13 +56,12 @@ bool WorkerThread::InitThreads() {
     thread t(WorkerLibevent, libevent_thread_ptr);
 
     // 创建一个线程之后必须使用join或者detach来释放线程资源，这里不能使用join阻塞住，只能使用detach
+    // 我以前写多线程代码使用join的目的是防止主线程提前结束，
+    // 但是现在因为主线程是一个eventloop，或者直接说这个进程就是一个守护进程，是不会结束的
     t.detach();
-
   }
 
-
-  // TODO 等待所有的线程都已经启动完毕
-  // 这里不需要使用join来防止主线程提前结束，因为主线程是一个eventloop，或者直接说这个进程就是一个守护进程，是不会结束的
+  // 这里不需要使用join来防止
   LOG(INFO) << "Create threads success. we hava done all the libevent setup.\n";
 
   return true;
@@ -111,7 +112,7 @@ void WorkerThread::ReadPipeCb(int notify_receive_fd, short event, void* arg) {
 	bufferevent_set_timeouts(client_tcp_event, &heartbeat_sec, NULL);
 	bufferevent_enable(client_tcp_event, EV_READ | EV_WRITE | EV_PERSIST);
 
-	if(NULL == conn) {
+	if (conn == NULL) {
 		LOG(ERROR) << "WorkerThread::ReadPipeCb:Can't listen for events on sfd = " << fd << "\n";
 		close(fd);
 	}
@@ -171,7 +172,6 @@ void WorkerThread::DispatchSfdToWorker(int sfd) {
   	LOG(INFO) << "WorkerThread::DispatchSfdToWorker:Writing to thread notify pipe\n";
   }
 }
-
 
 void WorkerThread::FreeConn(CONN* conn) {
   LOG(INFO) << "WorkerThread::FreeConn...\n";
