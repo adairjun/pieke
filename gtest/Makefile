@@ -5,7 +5,7 @@ CXX := g++
 AR := ar
 
 INCLUDE := -I/usr/local/include -I../include -I../../rapidmsg/include
-LIBS := -L/usr/local/lib -L/usr/lib64/mysql -levent -lpthread -lmysqlclient -lhiredis -lboost_system -lboost_filesystem -lprotobuf
+LIBS := -L/usr/local/lib -L/usr/lib64/mysql -levent -lpthread -lmysqlclient -lhiredis -lboost_system -lboost_filesystem -lprotobuf -L.. -lpieke -L../../rapidmsg -lrapidmsg
 
 CFLAGS := 
 CPPFLAGS := -std=c++11 -O2 -g -fPIC -DNDEBUG
@@ -14,7 +14,7 @@ CFILES := $(wildcard ./*.c)
 CPPFILES := $(wildcard ./*.cc ./*.cpp)
 OBJECTS := $(addsuffix .o, $(basename $(CFILES)) $(basename $(CPPFILES)))
 #TARGET := main master_worker
-TARGET := master_worker
+TARGET := master_worker unp_client
 
 # 安静模式的核心代码
 ifeq ("$(origin V)", "command line")
@@ -37,7 +37,10 @@ all: $(TARGET)
 #	$(QUIET_LINK)$(CXX) -DNDEBUG -o $@ $^ -L.. -lpieke -L../../rapidmsg -lrapidmsg
 
 master_worker: master_worker.o master_thread.o worker_thread.o
-	$(QUIET_LINK)$(CXX) -DNDEBUG -o $@ $^ -L.. -lpieke -L../../rapidmsg -lrapidmsg
+	$(QUIET_LINK)$(CXX) -DNDEBUG -o $@ $^ $(LIBS)
+
+unp_client: unp_client.o 
+	$(QUIET_LINK)$(CXX) -DNDEBUG -o $@ $^ $(LIBS)
 
 #下面的Makefile其实只是为了使用安静模式而已,如果将下面的代码去掉的话也能编译成功,因为默认的make规则将被执行
 %.o:%.c

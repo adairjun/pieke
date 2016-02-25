@@ -21,14 +21,16 @@ typedef struct {
     int 				notify_receive_fd;   //receiving end of notify pipe
     int 				notify_send_fd;      //sending end of notify pipe
     list<int> 	        list_conn;	 //queue of new connections to handle
-} LIBEVENT_THREAD;
+} LibeventThread;
+
+typedef boost::shared_ptr<LibeventThread>LibeventThreadPtr;
 
 // 这个是表示libevent正在执行的连接,这个CONN和LIBEVENT_THREAD是多对一的关系
 // 写这个的目的就是为了每一个连接设定一个buffer，因为在多线程环境下如果使用全局变量char buf[DATA_BUFFER_SIZE]会有竞争问题
 typedef struct {
     int    sfd;
     char  buf[DATA_BUFFER_SIZE];
-    LIBEVENT_THREAD *thread; 				 //Pointer to the thread object serving this connection
+    LibeventThread* thread;
 }CONN;
 
 class WorkerThread : public boost::enable_shared_from_this<WorkerThread> {
@@ -59,10 +61,10 @@ class WorkerThread : public boost::enable_shared_from_this<WorkerThread> {
   enum { CLIENT_HEARTBEAT_TIEMOUT = 10 };
 
  private:
-  vector<LIBEVENT_THREAD*> vec_libevent_thread_;
+  vector<LibeventThread*> vec_libevent_thread_;
   int last_thread_;
-
 };
 
+typedef boost::shared_ptr<WorkerThread>WorkerThreadPtr;
 
 #endif

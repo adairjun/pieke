@@ -14,6 +14,7 @@ MasterThread::MasterThread() {
   base_ = NULL;
   listenFd_ = 0;
   event_ = NULL;
+  pWorkerThread_ = new WorkerThread;
 }
 
 MasterThread::~MasterThread() {
@@ -35,7 +36,7 @@ bool MasterThread::InitMasterThread() {
 	return false;
   }
 
-  SocketObjPtr listener(new SocketObj(HOST, PORT, BACKLOG));
+  SocketObj* listener = new SocketObj(HOST, PORT, BACKLOG);
   if (listener->Listen() == false) {
 	LOG(ERROR) << "listen error\n";
   }
@@ -47,11 +48,11 @@ bool MasterThread::InitMasterThread() {
 
   base_ = event_base_new();
 
-  mybaseStruct mbs;
-  mbs.socketPtr = listener;
-  mbs.masterThreadPtr = shared_from_this();
+  mybaseStruct* pointer = new mybaseStruct;
+  pointer->socketPtr = listener;
+  pointer->masterThreadPtr = this;
 
-  event_ = event_new(base_, listenFd_, EV_READ|EV_PERSIST, AccepCb, (void*)&mbs);
+  event_ = event_new(base_, listenFd_, EV_READ | EV_PERSIST, MasterThread::AccepCb, (void*)pointer);
 
   event_add(event_, NULL);
 
@@ -59,11 +60,16 @@ bool MasterThread::InitMasterThread() {
 	return false;
   }
 
+  LOG(INFO) << "MasterThread::InitMasterThread() return true.\n";
+
   return true;
 }
 
 void MasterThread::Run() {
+	LOG(INFO) << "MasterThread::Run() start.........\n";
+
 	int ret = event_base_dispatch(base_);
+
     if (ret == -1) {
 	  int error_code = EVUTIL_SOCKET_ERROR();
 	  LOG(ERROR) << "MasterThread::Run():event_base_dispatch error, description = "
@@ -76,9 +82,10 @@ void MasterThread::Run() {
 }
 
 void MasterThread::AccepCb(evutil_socket_t listen_socket, short event, void* arg) {
+	LOG(INFO) << "MasterThread::Accept() start.........\n";
 	mybaseStruct* pointer = static_cast<mybaseStruct*>(arg);
-	SocketObjPtr listener = pointer->socketPtr;
-	MasterThreadPtr masterThreadPtr = pointer->masterThreadPtr;
+	SocketObj* listener = pointer->socketPtr;
+	MasterThread* masterThreadPtr = pointer->masterThreadPtr;
 	evutil_socket_t fd = listener->Accept();
 	if (fd == -1) {
 	  LOG(ERROR) << "MasterThread::AccepCb:accept error!\n";

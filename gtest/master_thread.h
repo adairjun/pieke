@@ -25,15 +25,14 @@ class MasterThread : public boost::enable_shared_from_this<MasterThread> {
   struct event_base* base_;
   evutil_socket_t listenFd_;
   struct event* event_;
-  //pImpl Idiom 手法
-  boost::shared_ptr<WorkerThread> pWorkerThread_;
+  WorkerThread* pWorkerThread_;
 };
 
 typedef boost::shared_ptr<MasterThread>MasterThreadPtr;
 
 typedef struct mybase {
-  SocketObjPtr socketPtr;
-  MasterThreadPtr masterThreadPtr;
+  SocketObj* socketPtr;
+  MasterThread* masterThreadPtr;
 }mybaseStruct;
 
 

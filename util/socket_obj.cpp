@@ -41,11 +41,11 @@ SocketObj::~SocketObj() {
 
 void SocketObj::Dump() const {
   printf("\n=====SocketObj Dump START ========== \n");
-  printf("sockFD_=%d", sockFD_);
-  printf("strHost_=%s", strHost_.c_str());
-  printf("iPort_=%d", iPort_);
-  printf("backlog_=%d", backlog_);
-  printf("strErrorMessage_=%s", strErrorMessage_.c_str());
+  printf("sockFD_=%d\n", sockFD_);
+  printf("strHost_=%s\n", strHost_.c_str());
+  printf("iPort_=%d\n", iPort_);
+  printf("backlog_=%d\n", backlog_);
+  printf("strErrorMessage_=%s\n", strErrorMessage_.c_str());
   printf("\n===SocketObj DUMP END ============\n");
 }
 
