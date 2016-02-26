@@ -13,19 +13,20 @@ using std::list;
 
 #define DATA_BUFFER_SIZE 2048
 
-// 由于是IO多路复用,就是说一个线程要监听多个socket套接字,所以这里用队列来保存多个sfd
+// 一个worker线程上就对应了一个LibeventThread
 typedef struct {
-    int 			    thread_id;        	 //unique ID of this thread
-    struct event_base* 	base;    			 //libevent handle this thread uses
-    struct event* 		notify_event;  		 //listen event for notify pipe
-    int 				notify_receive_fd;   //receiving end of notify pipe
-    int 				notify_send_fd;      //sending end of notify pipe
-    list<int> 	        list_conn;	 //queue of new connections to handle
+    int 			    thread_id;        	 //线程id
+    struct event_base* 	base;    			 //当前线程上的event_base
+    struct event* 		notify_event;  		 //当前线程上的event，这里也只需要一个event，就是绑定在管道上的event
+    int 				notify_receive_fd;   // worker线程接收master线程的指令
+    int 				notify_send_fd;      // master线程发送指令给worker线程
+    list<int> 	        list_conn;	         // master线程分配给worker线程的描述符
 } LibeventThread;
 
 typedef boost::shared_ptr<LibeventThread>LibeventThreadPtr;
 
-// 这个是表示libevent正在执行的连接,这个CONN和LIBEVENT_THREAD是多对一的关系
+// 这个是表示libevent正在执行的连接
+// 一个LibeventThread对应多个CONN
 // 写这个的目的就是为了每一个连接设定一个buffer，因为在多线程环境下如果使用全局变量char buf[DATA_BUFFER_SIZE]会有竞争问题
 typedef struct {
     int  sfd;

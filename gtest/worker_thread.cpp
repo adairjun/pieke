@@ -18,6 +18,10 @@ WorkerThread::~WorkerThread() {
 
 void WorkerThread::Dump() const {
   printf("\n=====WorkerThread Dump START ========== \n");
+  printf("last_thread_=%d ", last_thread_);
+  for (int i = 0; i < vec_libevent_thread_.size(); ++i) {
+	printf("vec_libevent_thread_[%d]=%p ", i, vec_libevent_thread_[i]);
+  }
   printf("\n===WorkerThread DUMP END ============\n");
 }
 
@@ -79,6 +83,7 @@ void WorkerThread::ReadPipeCb(int notify_receive_fd, short event, void* arg) {
   	return;
   }
 
+  // 由于libevent_thread_ptr是每个线程对应唯一的一个，那么它当下的list_conn也是只有这个线程来操作，其他的线程操作不了，所以不需要加锁
   int fd = libevent_thread_ptr->list_conn.front();
   libevent_thread_ptr->list_conn.pop_front();
 
@@ -113,8 +118,9 @@ void WorkerThread::ReadPipeCb(int notify_receive_fd, short event, void* arg) {
 	bufferevent_enable(client_tcp_event, EV_READ | EV_WRITE | EV_PERSIST);
 
 	if (conn == NULL) {
-		LOG(ERROR) << "WorkerThread::ReadPipeCb:Can't listen for events on sfd = " << fd << "\n";
-		close(fd);
+	  LOG(ERROR) << "WorkerThread::ReadPipeCb:Can't listen for events on sfd = " << fd << "\n";
+	  close(fd);
+	  return;
 	}
   }
 }
@@ -133,7 +139,7 @@ void WorkerThread::ClientTcpReadCb(struct bufferevent *bev, void *arg) {
   int n;
   evutil_socket_t fd = bufferevent_getfd(bev);
   // 这里的buf就是连接conn的buf
-  while (n=bufferevent_read(bev, conn->buf, DATA_BUFFER_SIZE), n>0) {
+  while (n=bufferevent_read(bev, conn->buf, DATA_BUFFER_SIZE), n > 0) {
     //回显给客户端
 	bufferevent_write(bev, conn->buf, n);
 	//将buf写回到客户端的时候一定要清空buf,否则的话下次read的时候buf里面会存在客户端上次发送的残留
@@ -142,22 +148,27 @@ void WorkerThread::ClientTcpReadCb(struct bufferevent *bev, void *arg) {
 }
 
 void WorkerThread::ClientTcpErrorCb(struct bufferevent *bev, short event, void *arg) {
-  LOG(INFO) << "WorkerThread::ClientTcpErrorCb...\n";
+  LOG(ERROR) << "WorkerThread::ClientTcpErrorCb...\n";
 
   if (event & BEV_EVENT_TIMEOUT) {
-    LOG(INFO) << "CWorkerThread::ClientTcpErrorCb:TimeOut.\n";
+    LOG(ERROR) << "WorkerThread::ClientTcpErrorCb:TimeOut.\n";
   } else if (event & BEV_EVENT_EOF) {
-    LOG(INFO) << "CWorkerThread::ClientTcpErrorCb:BEV_EVENT_EOF.\n";
+    LOG(ERROR) << "WorkerThread::ClientTcpErrorCb:BEV_EVENT_EOF.\n";
   } else if (event & BEV_EVENT_ERROR) {
 	int error_code = EVUTIL_SOCKET_ERROR();
-	LOG(INFO) << "WorkerThread::ClientTcpErrorCb:some other errorCode = " << error_code << ", description = " << evutil_socket_error_to_string(error_code);
+	LOG(ERROR) << "WorkerThread::ClientTcpErrorCb:some other errorCode = " << error_code
+			<< ", description = " << evutil_socket_error_to_string(error_code);
   }
+
+  // 出错之后要清理掉conn
+  CONN* conn = static_cast<CONN*>(arg);
+  CloseConn(conn, bev);
 }
 
 void WorkerThread::DispatchSfdToWorker(int sfd) {
   LOG(INFO) << "WorkerThread::DispatchSfdToWorker...\n";
 
-  //round-robin
+  //round-robin, 目的是为了让线程的工作量平均分配
   int tid = (last_thread_ + 1) % THREAD_NUM;
   LibeventThread* libevent_thread_ptr = vec_libevent_thread_.at(tid);
   last_thread_ = tid;
@@ -176,24 +187,17 @@ void WorkerThread::DispatchSfdToWorker(int sfd) {
 void WorkerThread::FreeConn(CONN* conn) {
   LOG(INFO) << "WorkerThread::FreeConn...\n";
 
-  if (conn) {
-    //就是在执行delete[]之前做一个检查,这种代码根本就不需要封装
-	if (conn->buf != NULL) {
-	  delete [] conn->buf;
-	}
-
-	if (conn != NULL) {
-	  delete conn;
-	}
+  if (conn != NULL) {
+    delete conn;
   }
 }
 
 void WorkerThread::CloseConn(CONN* conn, struct bufferevent* bev) {
   LOG(INFO) << "WorkerThread::CloseConn...\n";
-  assert(conn != NULL);
 
-  /* 清理资源：the event, the socket and the conn */
-  bufferevent_free(bev);
-
-  FreeConn(conn);
+  if (conn != NULL) {
+    /* 清理资源：the event, the socket and the conn */
+    bufferevent_free(bev);
+    FreeConn(conn);
+  }
 }

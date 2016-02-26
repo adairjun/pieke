@@ -1,9 +1,0 @@
-LogLevel[INFO]-----Time:[2016-02-17 11:24:44]
-FILE:[util/socket_obj.cpp]-----LINE:[16]
-consutor function HOST:[] PORT:[9999] BACKLOG:[10]
-LogLevel[INFO]-----Time:[2016-02-17 11:24:47]
-FILE:[util/socket_obj.cpp]-----LINE:[25]
-consutor function HOST:[127.0.0.1] PORT:[9999]
-LogLevel[ERROR]-----Time:[2016-02-17 11:24:55]
-FILE:[gtest/unp_server.cpp]-----LINE:[74]
-client close.

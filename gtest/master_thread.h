@@ -6,6 +6,10 @@
 
 class WorkerThread;
 
+/*
+ * 这是一个master-worker模型，master启动一个eventLoop,在监听套接字上执行accept，并把得到的文件描述符传给worker
+ * worker启动多个线程来处理文件描述符
+ */
 class MasterThread : public boost::enable_shared_from_this<MasterThread> {
  public:
   explicit MasterThread();

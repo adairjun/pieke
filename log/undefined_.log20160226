@@ -1,0 +1,426 @@
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[master_thread.cpp]-----LINE:[32]
+LIBEVENT VERSION IS2.0.22-stable
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[util/socket_obj.cpp]-----LINE:[16]
+consutor function HOST:[] PORT:[9999] BACKLOG:[10]
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[worker_thread.cpp]-----LINE:[26]
+Initializes worker threads...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[worker_thread.cpp]-----LINE:[66]
+Create threads success. we hava done all the libevent setup.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[master_thread.cpp]-----LINE:[66]
+MasterThread::Run() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:30]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:33]
+FILE:[util/socket_obj.cpp]-----LINE:[25]
+consutor function HOST:[127.0.0.1] PORT:[9999]
+LogLevel[INFO]-----Time:[2016-02-26 14:46:33]
+FILE:[master_thread.cpp]-----LINE:[81]
+MasterThread::Accept() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:33]
+FILE:[worker_thread.cpp]-----LINE:[167]
+WorkerThread::DispatchSfdToWorker...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:33]
+FILE:[worker_thread.cpp]-----LINE:[72]
+WorkerThread::ReadPipeCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:34]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:34]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:34]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:35]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:35]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:46:35]
+FILE:[worker_thread.cpp]-----LINE:[149]
+WorkerThread::ClientTcpErrorCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:46:35]
+FILE:[worker_thread.cpp]-----LINE:[154]
+WorkerThread::ClientTcpErrorCb:BEV_EVENT_EOF.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:35]
+FILE:[worker_thread.cpp]-----LINE:[201]
+WorkerThread::CloseConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:46:35]
+FILE:[worker_thread.cpp]-----LINE:[186]
+WorkerThread::FreeConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[master_thread.cpp]-----LINE:[32]
+LIBEVENT VERSION IS2.0.22-stable
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[util/socket_obj.cpp]-----LINE:[16]
+consutor function HOST:[] PORT:[9999] BACKLOG:[10]
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[worker_thread.cpp]-----LINE:[26]
+Initializes worker threads...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[worker_thread.cpp]-----LINE:[66]
+Create threads success. we hava done all the libevent setup.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:04]
+FILE:[master_thread.cpp]-----LINE:[66]
+MasterThread::Run() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:06]
+FILE:[util/socket_obj.cpp]-----LINE:[25]
+consutor function HOST:[127.0.0.1] PORT:[9999]
+LogLevel[INFO]-----Time:[2016-02-26 14:51:06]
+FILE:[master_thread.cpp]-----LINE:[81]
+MasterThread::Accept() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:06]
+FILE:[worker_thread.cpp]-----LINE:[167]
+WorkerThread::DispatchSfdToWorker...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:06]
+FILE:[worker_thread.cpp]-----LINE:[72]
+WorkerThread::ReadPipeCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:07]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:08]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:51:09]
+FILE:[worker_thread.cpp]-----LINE:[149]
+WorkerThread::ClientTcpErrorCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:51:09]
+FILE:[worker_thread.cpp]-----LINE:[154]
+WorkerThread::ClientTcpErrorCb:BEV_EVENT_EOF.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:09]
+FILE:[worker_thread.cpp]-----LINE:[201]
+WorkerThread::CloseConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:51:09]
+FILE:[worker_thread.cpp]-----LINE:[186]
+WorkerThread::FreeConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[master_thread.cpp]-----LINE:[32]
+LIBEVENT VERSION IS2.0.22-stable
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[util/socket_obj.cpp]-----LINE:[16]
+consutor function HOST:[] PORT:[9999] BACKLOG:[10]
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[worker_thread.cpp]-----LINE:[26]
+Initializes worker threads...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[worker_thread.cpp]-----LINE:[66]
+Create threads success. we hava done all the libevent setup.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[master_thread.cpp]-----LINE:[66]
+MasterThread::Run() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:05]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:07]
+FILE:[util/socket_obj.cpp]-----LINE:[25]
+consutor function HOST:[127.0.0.1] PORT:[9999]
+LogLevel[INFO]-----Time:[2016-02-26 14:52:07]
+FILE:[master_thread.cpp]-----LINE:[81]
+MasterThread::Accept() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:07]
+FILE:[worker_thread.cpp]-----LINE:[167]
+WorkerThread::DispatchSfdToWorker...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:07]
+FILE:[worker_thread.cpp]-----LINE:[72]
+WorkerThread::ReadPipeCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:09]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:10]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:10]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:52:11]
+FILE:[worker_thread.cpp]-----LINE:[149]
+WorkerThread::ClientTcpErrorCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:52:11]
+FILE:[worker_thread.cpp]-----LINE:[154]
+WorkerThread::ClientTcpErrorCb:BEV_EVENT_EOF.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:11]
+FILE:[worker_thread.cpp]-----LINE:[202]
+WorkerThread::CloseConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:52:11]
+FILE:[worker_thread.cpp]-----LINE:[186]
+WorkerThread::FreeConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[master_thread.cpp]-----LINE:[32]
+LIBEVENT VERSION IS2.0.22-stable
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[util/socket_obj.cpp]-----LINE:[16]
+consutor function HOST:[] PORT:[9999] BACKLOG:[10]
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[worker_thread.cpp]-----LINE:[26]
+Initializes worker threads...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[worker_thread.cpp]-----LINE:[66]
+Create threads success. we hava done all the libevent setup.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:16]
+FILE:[master_thread.cpp]-----LINE:[66]
+MasterThread::Run() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:18]
+FILE:[util/socket_obj.cpp]-----LINE:[25]
+consutor function HOST:[127.0.0.1] PORT:[9999]
+LogLevel[INFO]-----Time:[2016-02-26 14:53:18]
+FILE:[master_thread.cpp]-----LINE:[81]
+MasterThread::Accept() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:18]
+FILE:[worker_thread.cpp]-----LINE:[167]
+WorkerThread::DispatchSfdToWorker...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:18]
+FILE:[worker_thread.cpp]-----LINE:[72]
+WorkerThread::ReadPipeCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:19]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:19]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:19]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:19]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:20]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:20]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:20]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:53:21]
+FILE:[worker_thread.cpp]-----LINE:[149]
+WorkerThread::ClientTcpErrorCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:53:21]
+FILE:[worker_thread.cpp]-----LINE:[154]
+WorkerThread::ClientTcpErrorCb:BEV_EVENT_EOF.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:21]
+FILE:[worker_thread.cpp]-----LINE:[202]
+WorkerThread::CloseConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:53:21]
+FILE:[worker_thread.cpp]-----LINE:[186]
+WorkerThread::FreeConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[master_thread.cpp]-----LINE:[32]
+LIBEVENT VERSION IS2.0.22-stable
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[util/socket_obj.cpp]-----LINE:[16]
+consutor function HOST:[] PORT:[9999] BACKLOG:[10]
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[worker_thread.cpp]-----LINE:[26]
+Initializes worker threads...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[worker_thread.cpp]-----LINE:[66]
+Create threads success. we hava done all the libevent setup.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[worker_thread.cpp]-----LINE:[127]
+WorkerThread::WorkerLibevent...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:14]
+FILE:[master_thread.cpp]-----LINE:[66]
+MasterThread::Run() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:15]
+FILE:[util/socket_obj.cpp]-----LINE:[25]
+consutor function HOST:[127.0.0.1] PORT:[9999]
+LogLevel[INFO]-----Time:[2016-02-26 14:55:15]
+FILE:[master_thread.cpp]-----LINE:[81]
+MasterThread::Accept() start.........
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:15]
+FILE:[worker_thread.cpp]-----LINE:[167]
+WorkerThread::DispatchSfdToWorker...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:15]
+FILE:[worker_thread.cpp]-----LINE:[72]
+WorkerThread::ReadPipeCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:16]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:16]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:16]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:17]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:17]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:17]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:17]
+FILE:[worker_thread.cpp]-----LINE:[134]
+WorkerThread::ClientTcpReadCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:55:18]
+FILE:[worker_thread.cpp]-----LINE:[149]
+WorkerThread::ClientTcpErrorCb...
+
+LogLevel[ERROR]-----Time:[2016-02-26 14:55:18]
+FILE:[worker_thread.cpp]-----LINE:[154]
+WorkerThread::ClientTcpErrorCb:BEV_EVENT_EOF.
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:18]
+FILE:[worker_thread.cpp]-----LINE:[194]
+WorkerThread::CloseConn...
+
+LogLevel[INFO]-----Time:[2016-02-26 14:55:18]
+FILE:[worker_thread.cpp]-----LINE:[186]
+WorkerThread::FreeConn...
+
